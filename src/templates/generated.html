@@ -1,1 +1,17 @@
-<p>{{ paragraph }}</p>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Demo app</title>
+        <script src="/static/htmx.min.js"></script>
+        <script src="/static/raphael.min.js"></script>
+        <script src="/static/flowchart.min.js"></script>
+    </head>
+    <body>
+        <div id="diagram-container"></div>
+        <script>
+            flowchart.parse(`{{ diagram | safe }}`).drawSVG("diagram-container");
+        </script>
+    </body>
+</html>

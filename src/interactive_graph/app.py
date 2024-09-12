@@ -16,7 +16,13 @@ def homepage(request: Request) -> Response:
 
 def generate(request: Request) -> Response:
     return templates.TemplateResponse(request, "generated.html", context={
-        "paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        "diagram": """
+            st=>start: Start
+            e=>end: End
+            op1=>operation: My Operation
+
+            st->op1->e
+        """,
     })
 
 
