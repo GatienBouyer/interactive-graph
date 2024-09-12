@@ -4,11 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Demo app</title>
+        <script src="/static/htmx.min.js"></script>
     </head>
     <body>
         <h1>Demo app</h1>
-        <div>
-            <p>{{ paragraph }}</p>
-        </div>
+        <button hx-get="/generate" hx-swap="outerHTML">Generate</button>
     </body>
 </html>
