@@ -1,13 +1,23 @@
 # Demo for an interactive graph application
 
+## Requirements
+
+You need to have [Graphviz](https://graphviz.org/) installed on your machine.
+
+```
+sudo apt install graphviz graphviz-dev
+```
+
 ## Tech stack
 
 -   Python
     -   [Starlette](https://www.starlette.io/)
     -   [Jinja2](https://jinja.palletsprojects.com/en/latest/)
+    -   [NetworkX](https://networkx.org/)
 -   HTML / JS / CSS
     -   [HTMX](https://htmx.org/)
-    -   [flowchart.js](https://flowchart.js.org/)
+-   Visualization
+    -   [Graphviz](https://graphviz.org/)
 
 ## Quick start
 
