@@ -1,12 +1,13 @@
 from io import BytesIO
-from typing import Any
 
 from networkx import Graph
 from networkx.drawing import nx_agraph
 
 
-def generate_svg(graph: Graph[Any]) -> str:
+def generate_svg(graph: Graph) -> str:  # type: ignore[type-arg]
     agraph = nx_agraph.to_agraph(graph)
+    for node in agraph.nodes():
+        node.attr["id"] = node
     svg_io = BytesIO()
     agraph.draw(svg_io, format="svg", prog="dot", args="-Nshape=box")
     svg_document = svg_io.getvalue().decode()

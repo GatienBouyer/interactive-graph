@@ -8,6 +8,15 @@
         <script src="/static/htmx.min.js"></script>
     </head>
     <body>
-        <main>{{diagram | safe}}</main>
+        <main
+            hx-get="/node"
+            hx-vals="js:{element: event.target.parentElement.id}"
+            hx-target="#information"
+        >
+            {{diagram | safe}}
+            <div id="information">
+                <p>Click on a node to see its detailled informations</p>
+            </div>
+        </main>
     </body>
 </html>

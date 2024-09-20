@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/static/logoGB.svg" type="image/svg+xml" />
+        <title>Demo app</title>
+        <script src="/static/htmx.min.js"></script>
+    </head>
+    <body>
+        <h3>Description</h3>
+        <p>{{node_info | safe}}</p>
+        <h3>Successors</h3>
+        <ul>
+            {% for successor in successors %}
+            <li>{{successor | safe}}</li>
+            {% endfor %}
+        </ul>
+        <h3>Predecessors</h3>
+        <ul>
+            {% for predecessor in predecessors %}
+            <li>{{predecessor | safe}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
