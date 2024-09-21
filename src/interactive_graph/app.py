@@ -20,10 +20,38 @@ B   C
   D
 """
 nodes = [
-    ("My first operation", {"description": "Operation that initialize the workflow."}),
-    ("My second operation", {"description": "Compute alpha"}),
-    ("My third operation", {"description": "Arrange, organise, sort and filter the data."}),
-    ("My fourth operation", {"description": "Present the data to the user."}),
+    (
+        "A",
+        {
+            "label": "Operation 1",
+            "description": "Operation that initialize the workflow.",
+            "status": "done",
+        },
+    ),
+    (
+        "B",
+        {
+            "label": "Operation 2",
+            "description": "Compute alpha",
+            "status": "failed",
+        },
+    ),
+    (
+        "C",
+        {
+            "label": "Operation 3",
+            "description": "Arrange, organise, sort and filter the data.",
+            "status": "ready",
+        },
+    ),
+    (
+        "D",
+        {
+            "label": "Operation 4",
+            "description": "Present the data to the user.",
+            "status": "unavailable",
+        },
+    ),
 ]
 graph.add_nodes_from(nodes)
 graph.add_edges_from([
