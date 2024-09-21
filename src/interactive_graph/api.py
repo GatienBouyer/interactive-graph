@@ -1,4 +1,3 @@
-from networkx import DiGraph
 from starlette.applications import Starlette
 from starlette.exceptions import HTTPException
 from starlette.requests import Request
@@ -7,59 +6,11 @@ from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
-from interactive_graph import graphviz
+from interactive_graph import visualization, work
 
 templates = Jinja2Templates(directory="src/templates")
 
-graph: DiGraph = DiGraph()  # type: ignore[type-arg]
-"""Diamond diagram
-  A
-// \\
-B   C
-\\ //
-  D
-"""
-nodes = [
-    (
-        "A",
-        {
-            "label": "Operation 1",
-            "description": "Operation that initialize the workflow.",
-            "status": "done",
-        },
-    ),
-    (
-        "B",
-        {
-            "label": "Operation 2",
-            "description": "Compute alpha",
-            "status": "failed",
-        },
-    ),
-    (
-        "C",
-        {
-            "label": "Operation 3",
-            "description": "Arrange, organise, sort and filter the data.",
-            "status": "ready",
-        },
-    ),
-    (
-        "D",
-        {
-            "label": "Operation 4",
-            "description": "Present the data to the user.",
-            "status": "unavailable",
-        },
-    ),
-]
-graph.add_nodes_from(nodes)
-graph.add_edges_from([
-    (nodes[0][0], nodes[1][0]),
-    (nodes[1][0], nodes[3][0]),
-    (nodes[0][0], nodes[2][0]),
-    (nodes[2][0], nodes[3][0]),
-])
+graph = work.import_graph()
 
 
 def homepage(request: Request) -> Response:
@@ -69,7 +20,7 @@ def homepage(request: Request) -> Response:
 
 
 def generate(request: Request) -> Response:
-    graph_svg = graphviz.generate_svg(graph)
+    graph_svg = visualization.generate_svg(graph)
     return templates.TemplateResponse(
         request,
         "generated.html",
@@ -78,7 +29,7 @@ def generate(request: Request) -> Response:
 
 
 async def node(request: Request) -> Response:
-    node_id = request.query_params.get("element")
+    node_id = request.query_params["element"]
     if node_id not in graph:
         raise HTTPException(404, "Node not found")
     node = graph.nodes[node_id]
