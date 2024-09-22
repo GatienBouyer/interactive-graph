@@ -13,17 +13,17 @@ multigraph: false
 nodes:
     - description: Operation that initialize the workflow.
       id: A
-      label: Operation 1
+      name: Operation 1
       status: done
     - description: Compute alpha
       id: B
-      label: Operation 2
+      name: Operation 2
       status: failed
     - description: Arrange, organise, sort and filter the data.
       id: C
-      label: Operation 3
+      name: Operation 3
       status: ready
     - description: Present the data to the user.
       id: D
-      label: Operation 4
+      name: Operation 4
       status: unavailable

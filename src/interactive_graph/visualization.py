@@ -19,6 +19,7 @@ def prepare_node_attributes(graph: AGraph) -> None:
     for node in graph.nodes():
         node.attr["id"] = node
         status = node.attr["status"]
+        node.attr["label"] = node.attr["name"]
         node.attr["style"] = "filled"
         fillcolor, bordercolor = status_to_colors[status]
         node.attr["fillcolor"] = fillcolor
