@@ -31,6 +31,12 @@ Install the application
 pip install -e .
 ```
 
+To also install development dependencies use:
+
+```sh
+pip install -e .[dev]
+```
+
 Launch the server and go to [http://0.0.0.0:5000](http://0.0.0.0:5000)
 
 ```sh

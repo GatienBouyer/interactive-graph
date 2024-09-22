@@ -1,3 +1,7 @@
+"""
+Functions to draw the graph.
+"""
+
 from io import BytesIO
 
 from networkx import Graph
@@ -15,9 +19,9 @@ status_to_colors = {
 }
 
 
-def prepare_node_attributes(agraph: AGraph) -> None:
+def _prepare_node_attributes(agraph: AGraph) -> None:
+    """Update the node attributes to customize the graphviz output."""
     for node in agraph.nodes():
-        print(type(node))
         node.attr["id"] = node
         status = node.attr[NodeAttr.STATUS]
         node.attr["label"] = node.attr[NodeAttr.NAME]
@@ -27,10 +31,13 @@ def prepare_node_attributes(agraph: AGraph) -> None:
         node.attr["color"] = bordercolor
 
 
-def agraph_to_svg(agraph: AGraph) -> str:
+def _agraph_to_svg(agraph: AGraph) -> str:
+    """Generate the svg from the graph."""
     svg_io = BytesIO()
     agraph.draw(svg_io, format="svg", prog="dot", args="-Nshape=box")
     svg_document = svg_io.getvalue().decode()
+
+    # Remove the xml and doctype headers
     svg_tag_start = svg_document.find("<svg ")
     svg_tag_end = svg_document.find("</svg>", svg_tag_start)
     svg = svg_document[svg_tag_start:svg_tag_end + len("</svg>") + 1]
@@ -38,7 +45,8 @@ def agraph_to_svg(agraph: AGraph) -> str:
 
 
 def generate_svg(graph: Graph) -> str:  # type: ignore[type-arg]
+    """Generate the svg visualization of a networkx graph using graphviz."""
     agraph = nx_agraph.to_agraph(graph)
-    prepare_node_attributes(agraph)
-    svg = agraph_to_svg(agraph)
+    _prepare_node_attributes(agraph)
+    svg = _agraph_to_svg(agraph)
     return svg

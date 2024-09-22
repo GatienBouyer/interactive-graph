@@ -1,3 +1,7 @@
+"""
+Start the uvicorn server.
+"""
+
 import uvicorn  # type: ignore[import-not-found]
 
 if __name__ == "__main__":

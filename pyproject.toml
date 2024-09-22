@@ -4,26 +4,26 @@ version = "0.0.1"
 description = "A demo app for a graph-based software"
 keywords = []
 authors = [
-	{name="Gatien Bouyer"},
+    {name="Gatien Bouyer"},
 ]
 readme = "README.md"
 license = {text = "MIT License"}
 requires-python = ">=3.10"
 dependencies = [
-	"starlette==0.38.5",
-	"uvicorn[standard]==0.30.6",
-	"jinja2==3.1.4",
-	"networkx==3.3",
-	"pygraphviz==1.13",
+    "starlette==0.38.5",
+    "uvicorn[standard]==0.30.6",
+    "jinja2==3.1.4",
+    "networkx==3.3",
+    "pygraphviz==1.13",
 ]
 classifiers = [
-	"License :: OSI Approved :: MIT License",
-	"Programming Language :: Python :: 3.10",
-	"Programming Language :: Python :: 3.11",
-	"Programming Language :: Python :: 3.12",
-	"Intended Audience :: Developers",
-	"Operating System :: OS Independent",
-	"Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Development Status :: 2 - Pre-Alpha",
 ]
 
 [project.urls]
@@ -32,10 +32,11 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-	"mypy",
-	"isort",
-	"autopep8",
-	"types-networkx"
+    "mypy",
+    "isort",
+    "autopep8",
+    "types-networkx",
+    "pylint",
 ]
 
 [build-system]
