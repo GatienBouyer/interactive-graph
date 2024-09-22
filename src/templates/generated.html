@@ -9,6 +9,14 @@
     </head>
     <body>
         <div
+            style="display: none"
+            hx-get="/generate"
+            hx-target="svg"
+            hx-select="svg"
+            hx-swap="outerHTML"
+            hx-trigger="every 2s"
+        ></div>
+        <div
             hx-get="/node"
             hx-vals="js:{element: event.target.parentElement.id}"
             hx-target="#information"
