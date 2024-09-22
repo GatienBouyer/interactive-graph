@@ -8,8 +8,12 @@
         <script src="/static/htmx.min.js"></script>
     </head>
     <body>
+        <h3>Title</h3>
+        <p>{{node.get("label")}}</p>
+        <h3>Status</h3>
+        <pre>{{node.get("status")}}</pre>
         <h3>Description</h3>
-        <p>{{node_info | safe}}</p>
+        <p>{{node.get("description") | safe}}</p>
         <h3>Successors</h3>
         <ul>
             {% for successor in successors %}

@@ -40,7 +40,7 @@ def node(request: Request) -> Response:
     node = work.graph.nodes[node_id]
     return templates.TemplateResponse(request, "node_details.html", context={
         "node_id": node_id,
-        "node_info": node.get("description"),
+        "node": node,
         "predecessors": tuple(work.graph.predecessors(node_id)),
         "successors": tuple(work.graph.successors(node_id)),
     })
