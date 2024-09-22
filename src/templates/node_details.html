@@ -9,11 +9,11 @@
     </head>
     <body>
         <h3>Title</h3>
-        <p>{{node.get("name")}}</p>
+        <p>{{node[NodeAttr.NAME]}}</p>
         <h3>Status</h3>
-        <pre>{{node.get("status")}}</pre>
+        <pre>{{node[NodeAttr.STATUS]}}</pre>
         <h3>Description</h3>
-        <p>{{node.get("description") | safe}}</p>
+        <p>{{node[NodeAttr.DESC] | safe}}</p>
         <h3>Successors</h3>
         <ul>
             {% for successor in successors %}

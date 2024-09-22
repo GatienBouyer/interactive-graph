@@ -35,6 +35,7 @@ def node(request: Request) -> Response:
     return templates.TemplateResponse(request, "node_details.html", context={
         "node_id": node_id,
         "node": node,
+        "NodeAttr": work.NodeAttr,
         "predecessors": tuple(work.graph.predecessors(node_id)),
         "successors": tuple(work.graph.successors(node_id)),
     })

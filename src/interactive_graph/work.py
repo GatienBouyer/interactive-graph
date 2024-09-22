@@ -18,6 +18,12 @@ class NodeState(StrEnum):
     UNAVAILABLE = "unavailable"
 
 
+class NodeAttr(StrEnum):
+    STATUS = "status"
+    NAME = "name"
+    DESC = "description"
+
+
 def import_graph() -> "DiGraph[str]":
     """Load graph from the yaml file."""
     with GRAPH_YAML.open() as file:
@@ -34,7 +40,7 @@ class NotReadyError(Exception):
 
 
 def can_do_operation(node_id: str) -> bool:
-    return graph.nodes[node_id]["status"] in (NodeState.READY, NodeState.DONE, NodeState.FAILED)
+    return graph.nodes[node_id][NodeAttr.STATUS] in (NodeState.READY, NodeState.DONE, NodeState.FAILED)
 
 
 def do_operation(node_id: str) -> None:
@@ -45,15 +51,15 @@ def do_operation(node_id: str) -> None:
     node = graph.nodes[node_id]
     if not can_do_operation(node_id):
         raise NotReadyError()
-    node["status"] = NodeState.IN_PROGRESS
+    node[NodeAttr.STATUS] = NodeState.IN_PROGRESS
     invalidate_all_successors(node_id)
     sleep(2)
     if random() < 0.85:
-        node["status"] = NodeState.DONE
+        node[NodeAttr.STATUS] = NodeState.DONE
         update_node_done(node_id)
         print(f"Success for the operation of the node {node_id}.")
     else:
-        node["status"] = NodeState.FAILED
+        node[NodeAttr.STATUS] = NodeState.FAILED
         print(f"Operation for node {node_id} failed.")
 
 
@@ -61,11 +67,14 @@ def update_node_done(node_id: str) -> None:
     """Mark ready the successors that can be,
     i.e. no more of their predecessors are not done."""
     for successor in graph.successors(node_id):
-        if all(graph.nodes[pred]["status"] == NodeState.DONE for pred in graph.predecessors(successor)):
-            graph.nodes[successor]["status"] = NodeState.READY
+        if all(
+            graph.nodes[pred][NodeAttr.STATUS] == NodeState.DONE
+            for pred in graph.predecessors(successor)
+        ):
+            graph.nodes[successor][NodeAttr.STATUS] = NodeState.READY
 
 
 def invalidate_all_successors(node_id: str) -> None:
     for successor in graph.successors(node_id):
-        graph.nodes[successor]["status"] = NodeState.UNAVAILABLE
+        graph.nodes[successor][NodeAttr.STATUS] = NodeState.UNAVAILABLE
         invalidate_all_successors(successor)
