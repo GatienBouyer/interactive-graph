@@ -13,12 +13,6 @@ from interactive_graph import visualization, work
 templates = Jinja2Templates(directory="src/templates")
 
 
-def homepage(request: Request) -> Response:
-    return templates.TemplateResponse(request, "index.html", context={
-        "paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-    })
-
-
 def generate(request: Request) -> Response:
     graph_svg = visualization.generate_svg(work.graph)
     return templates.TemplateResponse(
@@ -56,8 +50,7 @@ def run(request: Request) -> Response:
 
 app = Starlette(debug=True, routes=[
     Mount('/static', StaticFiles(directory='src/static'), name='static'),
-    Route('/', homepage),
-    Route('/generate', generate),
+    Route('/', generate),
     Route('/node', node),
     Route('/run', run),
 ])
