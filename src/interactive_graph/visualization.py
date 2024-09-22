@@ -31,22 +31,17 @@ def _prepare_node_attributes(agraph: AGraph) -> None:
         node.attr["color"] = bordercolor
 
 
-def _agraph_to_svg(agraph: AGraph) -> str:
+def _agraph_to_tk_script(agraph: AGraph) -> str:
     """Generate the svg from the graph."""
-    svg_io = BytesIO()
-    agraph.draw(svg_io, format="svg", prog="dot", args="-Nshape=box")
-    svg_document = svg_io.getvalue().decode()
-
-    # Remove the xml and doctype headers
-    svg_tag_start = svg_document.find("<svg ")
-    svg_tag_end = svg_document.find("</svg>", svg_tag_start)
-    svg = svg_document[svg_tag_start:svg_tag_end + len("</svg>") + 1]
-    return svg
+    io = BytesIO()
+    agraph.draw(io, format="tk", prog="dot", args="-Nshape=box")
+    tk_script = io.getvalue().decode()
+    return tk_script
 
 
-def generate_svg(graph: Graph) -> str:  # type: ignore[type-arg]
-    """Generate the svg visualization of a networkx graph using graphviz."""
+def generate_tk_graph(graph: Graph) -> str:  # type: ignore[type-arg]
+    """Generate the tk commands to display the networkx graph using graphviz."""
     agraph = nx_agraph.to_agraph(graph)
     _prepare_node_attributes(agraph)
-    svg = _agraph_to_svg(agraph)
+    svg = _agraph_to_tk_script(agraph)
     return svg

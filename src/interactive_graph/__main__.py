@@ -1,15 +1,12 @@
 """
-Start the uvicorn server.
+Start the tkinter app.
 """
 
-import uvicorn  # type: ignore[import-not-found]
+import tkinter
+
+from interactive_graph.app import App
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "interactive_graph.api:app",
-        port=5000,
-        host="0.0.0.0",
-        log_level="info",
-        reload=True,
-        reload_dirs=["src/interactive_graph"],
-    )
+    root = tkinter.Tk()
+    App(root)
+    root.mainloop()

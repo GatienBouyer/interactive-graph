@@ -15,11 +15,8 @@ sudo apt install graphviz graphviz-dev
 ## Tech stack
 
 -   Python
-    -   [Starlette](https://www.starlette.io/)
-    -   [Jinja2](https://jinja.palletsprojects.com/en/latest/)
+    -   [Tkinter](https://docs.python.org/3/library/tkinter.html)
     -   [NetworkX](https://networkx.org/)
--   HTML / JS / CSS
-    -   [HTMX](https://htmx.org/)
 -   Visualization
     -   [Graphviz](https://graphviz.org/)
 
@@ -31,13 +28,13 @@ Install the application
 pip install -e .
 ```
 
-To also install development dependencies use:
+To also install development dependencies
 
 ```sh
 pip install -e .[dev]
 ```
 
-Launch the server and go to [http://0.0.0.0:5000](http://0.0.0.0:5000)
+Launch the tkinter application
 
 ```sh
 python -m interactive_graph
