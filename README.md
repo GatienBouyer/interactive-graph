@@ -1,5 +1,7 @@
 # Demo for an interactive graph application
 
+![Exeample of what the interactive graph looks like](exeample.png)
+
 ## Requirements
 
 This project uses Python3.11 features.
