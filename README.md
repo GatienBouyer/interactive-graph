@@ -2,6 +2,8 @@
 
 ## Requirements
 
+This project uses Python3.11 features.
+
 You need to have [Graphviz](https://graphviz.org/) installed on your machine.
 
 ```

@@ -22,5 +22,6 @@
             <li>{{predecessor | safe}}</li>
             {% endfor %}
         </ul>
+        <button hx-get="/run?element={{node_id}}">Run operation</button>
     </body>
 </html>
