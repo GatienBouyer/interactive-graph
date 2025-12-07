@@ -1,4 +1,5 @@
 import tkinter
+from typing import cast
 
 from interactive_graph import visualization, work
 
@@ -20,14 +21,15 @@ class App:
         self.canvas = None
         self.refresh()
 
-        self.frame.nametowidget("generateButton").invoke()
+        btn = cast(tkinter.Button, self.frame.nametowidget("generateButton"))
+        btn.invoke()
 
     def refresh(self) -> None:
         self.draw_graph()
         self.frame.after(1000, self.refresh)
 
     def generate(self) -> None:
-        button: tkinter.Misc = self.frame.nametowidget("generateButton")
+        button = cast(tkinter.Misc, self.frame.nametowidget("generateButton"))
         button.destroy()
         self.canvas = tkinter.Canvas(self.frame, name="canvas", bg="white")
         self.canvas.pack(expand=True, fill="both")
@@ -37,7 +39,7 @@ class App:
             return
         self.canvas.delete("all")
         script = visualization.generate_tk_graph(work.graph)
-        widget_pathname = self.canvas.winfo_pathname(self.canvas.winfo_id())
+        widget_pathname = cast(tkinter.Misc, self.canvas.winfo_pathname(self.canvas.winfo_id()))
         self.canvas.tk.eval(f"set c {widget_pathname}")
         node_id = None
         for line in script.splitlines():

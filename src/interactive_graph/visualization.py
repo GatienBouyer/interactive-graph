@@ -4,7 +4,7 @@ Functions to draw the graph.
 
 from io import BytesIO
 
-from networkx import Graph
+from networkx import DiGraph
 from networkx.drawing import nx_agraph
 from pygraphviz import AGraph  # type: ignore[import-untyped]
 
@@ -39,9 +39,9 @@ def _agraph_to_tk_script(agraph: AGraph) -> str:
     return tk_script
 
 
-def generate_tk_graph(graph: Graph) -> str:  # type: ignore[type-arg]
+def generate_tk_graph(graph: "DiGraph[str]") -> str:
     """Generate the tk commands to display the networkx graph using graphviz."""
-    agraph = nx_agraph.to_agraph(graph)
+    agraph = nx_agraph.to_agraph(graph)  # type: ignore[arg-type]
     _prepare_node_attributes(agraph)
     svg = _agraph_to_tk_script(agraph)
     return svg
